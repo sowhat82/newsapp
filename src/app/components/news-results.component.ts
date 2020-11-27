@@ -61,8 +61,10 @@ export class NewsResultsComponent implements OnInit {
   
       this.cache.cacheResults(art)
     }
+  }
 
-
+  saveArticle(){
+    window.alert("Sorry, this is only available in the paid version of the app");
 
   }
 

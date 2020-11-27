@@ -1,5 +1,8 @@
-<h2>Countries  <button class = "float-right" [routerLink] = "['/']">Home</button></h2>
+<h2>Countries</h2>  
+<button class = "float-right" [routerLink] = "['/']">Home</button>
+<button class = "float-right" [routerLink] = "['/apipage']">Settings</button>
 
+<br><hr>
 <a href="" *ngFor = "let r of result" [routerLink] = "['/news-results', r.alpha2Code]">
     <div class="row">
             <img class="img-fluid img-thumbnail rounded" src="{{ r.flag }}">
