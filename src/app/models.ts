@@ -9,5 +9,6 @@ export interface apiForm{
 export interface articles{
     country: string
     articles: []
+    timeStamp: Date
 }
     

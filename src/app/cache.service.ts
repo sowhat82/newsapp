@@ -28,9 +28,10 @@ export class cache extends Dexie {
       return await this.cacheForm.add(a)
   }
 
-  async pullFromCache(countryCode: string){
+  pullFromCache(countryCode: string){
 
-    return this.cacheForm.where('country').equals('countryCode')
+//    return this.cacheForm.where('country').equals('countryCode')
+   return this.cacheForm.toArray()
 
 }
 

@@ -16,29 +16,51 @@ export class NewsResultsComponent implements OnInit {
   countryCode = ""
   result : any
   articles: []
+  counter = 0 
 
   async ngOnInit(): Promise<void> {
-
+    var found = false
     this.countryCode = this.activatedroute.snapshot.params['countryCode']  
+    console.info(this.countryCode)
 
- //   this.result = await this.cache.pullFromCache(this.countryCode)
-      console.info(this.result)
+    this.result = await this.cache.pullFromCache(this.countryCode)
 
-   const params = new HttpParams()
-   .set('country', this.countryCode)
-   .set('apiKey', this.apiDB['apiKey'])
-
-  this.result = await this.http.get('https://newsapi.org/v2/top-headlines', { params: params }).toPromise()
-
+    for (var i = 0; i < this.result.length; i++) {
+      if(this.result[i].country == this.countryCode){
+        found = true
+        this.counter = i
+        break
+      }
    
-    this.articles = this.result.articles
-
-    const art: articles ={
-      country: this.countryCode,
-      articles: this.articles
     }
 
-    this.cache.cacheResults(art)
+    if (found){
+      console.info(this.result)
+      this.articles = this.result[this.counter].articles
+    }
+    else {
+      console.info('not found')
+
+      const params = new HttpParams()
+      .set('country', this.countryCode)
+      .set('apiKey', this.apiDB['apiKey'])
+      .set('pageSize', "30")
+  
+      this.result = await this.http.get('https://newsapi.org/v2/top-headlines', { params: params }).toPromise()
+  
+     
+      this.articles = this.result.articles
+  
+      const art: articles ={
+        country: this.countryCode,
+        articles: this.articles,
+        timeStamp: new Date()
+      }
+  
+      this.cache.cacheResults(art)
+    }
+
+
 
   }
 
