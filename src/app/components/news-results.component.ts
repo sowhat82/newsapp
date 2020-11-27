@@ -26,9 +26,11 @@ export class NewsResultsComponent implements OnInit {
     this.result = await this.cache.pullFromCache(this.countryCode)
 
     for (var i = 0; i < this.result.length; i++) {
-      if(this.result[i].country == this.countryCode){
+      if((this.result[i].country == this.countryCode) && (this.result[i].timeStamp > new Date(new Date().getTime() - 5*60000)))
+      {
+        console.log('found still true')
         found = true
-        this.counter = i
+        this.counter = i  
         break
       }
    
