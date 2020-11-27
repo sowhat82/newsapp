@@ -12,11 +12,12 @@ import { database } from './database.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { cache } from './cache.service';
 
 const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'apipage', component: APIPageComponent },
   { path: 'country-list', component: CountryListComponent },
-  { path: '', component: HomeComponent },
   { path: 'news-results/:countryCode', component: NewsResultsComponent },
 //  { path: 'search/:genre/:q', component: ResultsComponent },
     { path: "**", redirectTo: '/', pathMatch: 'full' },
@@ -35,7 +36,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [database],
+  providers: [database, cache],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

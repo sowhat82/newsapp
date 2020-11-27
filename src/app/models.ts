@@ -4,3 +4,10 @@ export interface apiForm{
     countryList: string;
     newsArticles: {};
 }
+
+
+export interface articles{
+    country: string
+    articles: []
+}
+    

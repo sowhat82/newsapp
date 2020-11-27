@@ -6,8 +6,8 @@
       <input type="text" formControlName = "apiKey" class="form-control" id="exampleFormControlInput1" placeholder="API from newsapi.org">
     </div>
 
-    <button type="button" class="btn btn-primary">Back</button>
-    <button type="button" class="btn btn-secondary">Delete</button>
+    <button type="button" class="btn btn-primary" [routerLink] = "['/']">Back</button>
+    <button type="button" class="btn btn-secondary" (click) = "deleteApi()" [disabled] = "apiForm.invalid">Delete</button>
     <button type="button" class="btn btn-success float-right" [disabled] = "apiForm.invalid" (click) = addApi()>Add</button>
 
 </form>

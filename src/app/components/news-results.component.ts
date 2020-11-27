@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {database} from '../database.service'
+import { cache } from '../cache.service';
+import { articles } from '../models';
 
 @Component({
   selector: 'app-news-results',
@@ -10,7 +12,7 @@ import {database} from '../database.service'
 })
 export class NewsResultsComponent implements OnInit {
 
-  constructor(private activatedroute: ActivatedRoute, private apiDB: database, private http: HttpClient) { }
+  constructor(private activatedroute: ActivatedRoute, private apiDB: database, private http: HttpClient, private cache: cache) { }
   countryCode = ""
   result : any
   articles: []
@@ -19,7 +21,8 @@ export class NewsResultsComponent implements OnInit {
 
     this.countryCode = this.activatedroute.snapshot.params['countryCode']  
 
-
+ //   this.result = await this.cache.pullFromCache(this.countryCode)
+      console.info(this.result)
 
    const params = new HttpParams()
    .set('country', this.countryCode)
@@ -27,10 +30,17 @@ export class NewsResultsComponent implements OnInit {
 
   this.result = await this.http.get('https://newsapi.org/v2/top-headlines', { params: params }).toPromise()
 
-  console.info(this.result)
    
     this.articles = this.result.articles
 
+    const art: articles ={
+      country: this.countryCode,
+      articles: this.articles
+    }
+
+    this.cache.cacheResults(art)
+
   }
+
 
 }

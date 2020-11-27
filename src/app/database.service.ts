@@ -35,16 +35,18 @@ export class database extends Dexie {
   }
 
   async getApi():Promise<apiForm[]> {
-      
-    
     return this.apiForm.orderBy('apiKey').toArray()
+  }
 
+  async deleteApi(a: apiForm):Promise<apiForm[]> {
+    const deleteCount = await this.apiForm
+ .where('apiKey').anyOf(a.apiKey)
+.delete()
+
+    return null
 
   }
 
 
 
-//   async getSearchOptions():Promise<searchForm[]> {
-//     return this.searchForm.orderBy('q').toArray()
-//   }
 }
