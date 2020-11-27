@@ -1,1 +1,8 @@
-<p>country-list works!</p>
+<h2>Countries</h2>
+
+<a href="" *ngFor = "let r of result" [routerLink] = "['/news-results', r.alpha2Code]">
+    <div class="row">
+            <img class="img-fluid img-thumbnail rounded" src="{{ r.flag }}">
+            <h6>{{ r.name }}  {{r.alpha2Code}}</h6>
+    </div>
+</a> 

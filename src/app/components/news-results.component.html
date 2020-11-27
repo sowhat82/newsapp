@@ -1,1 +1,35 @@
-<p>news-results works!</p>
+<h2>News Results</h2>
+
+<h5>
+    Search results
+</h5>
+<br><hr>
+<div *ngFor = "let r of articles; let idx = index">
+    <div class="row">
+        <div class="col-8 d-flex justify-content-center">
+            <img class="img-fluid img-thumbnail rounded" src="{{ r.urlToImage }}">
+        </div>
+        <div class="col-8">
+            <h6>{{ r.title }}</h6>
+            <p class="">
+                {{ r.source.name }}
+            </p>
+            <p class="">
+                {{ r.author }}
+            </p>
+            <p class="">
+                {{ r.description }}
+            </p>
+            <p class="">
+                {{ r.publishedAt }}
+            </p>
+            <p class="">
+                {{ r.content }}
+            </p>
+            <a [href] = "r.url" target="_blank">
+                URL
+            </a>
+<br><br><hr>
+        </div>
+    </div>
+</div> 

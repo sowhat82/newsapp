@@ -1,0 +1,13 @@
+<button (click) = proceed()>Proceed</button>
+
+<br>
+
+<h4>My Saved APIs</h4>
+<br>
+<div>
+  <ul class="list-group">
+    <a href="" *ngFor = "let s of storedApis" (click) = gotoApiPage(s.apiKey) [routerLink] = "['/country-list']">
+      <li class="list-group-item">{{s.apiKey}}</li>
+    </a>
+  </ul>
+</div>
