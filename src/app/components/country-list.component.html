@@ -3,9 +3,9 @@
 <button class = "float-right" [routerLink] = "['/apipage']">Settings</button>
 
 <br><hr>
-<a href="" *ngFor = "let r of result" [routerLink] = "['/news-results', r.alpha2Code]">
+<a href="" *ngFor = "let r of storedCountries" [routerLink] = "['/news-results', r.shortName]">
     <div class="row">
-            <img class="img-fluid img-thumbnail rounded" src="{{ r.flag }}">
-            <h6>{{ r.name }}  {{r.alpha2Code}}</h6>
+            <img class="img-fluid img-thumbnail rounded" src="{{ r.flagImageUrl }}">
+            <h6>{{ r.longName }}</h6>
     </div>
 </a> 

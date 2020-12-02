@@ -1,14 +1,18 @@
 
 export interface apiForm{
     apiKey: string;
-    countryList: string;
-    newsArticles: {};
 }
 
+export interface country{
+    shortName: string;
+    longName: string;
+    flagImageUrl: string;
+}
 
-export interface articles{
+export interface article{
     country: string
-    articles: []
+    articleDetails: {}
     timeStamp: Date
+    saved: boolean
 }
     

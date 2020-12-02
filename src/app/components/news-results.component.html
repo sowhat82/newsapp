@@ -1,7 +1,7 @@
 <h2>News Results</h2>
-
+<button class = "float-right" [routerLink] = "['/']">Home</button>
 <h5>
-    Search results
+    Search results for {{this.countryCode}}
 </h5>
 <br><hr>
 <div *ngFor = "let r of articles; let idx = index">

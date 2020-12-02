@@ -2,12 +2,12 @@ import { GeneratedFile } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import Dexie from 'dexie';
 import { generate } from 'rxjs';
-import { articles } from './models';
+import { article } from './models';
 
 @Injectable()
 export class cache extends Dexie {
 
-  private cacheForm: Dexie.Table<articles, number>;
+  private cacheForm: Dexie.Table<article, number>;
 
   constructor() {
     // database name
@@ -15,7 +15,7 @@ export class cache extends Dexie {
 
     // setup the schema for v1
     this.version(2).stores({
-      cacheForm: "++id, articles"
+      cacheForm: "++id, article"
     })
 
     // get a reference to the todo collection
@@ -23,7 +23,7 @@ export class cache extends Dexie {
   }
 
 
-  async cacheResults(a: articles){
+  async cacheResults(a: article){
     
       return await this.cacheForm.add(a)
   }

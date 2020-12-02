@@ -20,14 +20,13 @@ export class APIPageComponent implements OnInit {
     this.apiForm = this.fb.group({
       apiKey: this.fb.control('', [Validators.required]),
       })
+      
   }
 
   async addApi(){
 
     const api : apiForm = {
       apiKey: this.apiForm.get('apiKey').value,
-      countryList: "ae;ar;at;au;be;bg;br;ca;ch;cn;co;cu;cz;de;eg;fr;gb;gr;hk;hu;id;ie;il;in;it;jp;kr;lt;lv;ma;mx;my;ng;nl;no;nz;ph;pl;pt;ro;rs;ru;sa;se;sg;si;sk;th;tr;tw;ua;us;ve;za;",
-      newsArticles: {}
     }
 
     await this.apiDB.addApi(api)
@@ -39,8 +38,6 @@ export class APIPageComponent implements OnInit {
 
     const api : apiForm = {
       apiKey: this.apiForm.get('apiKey').value,
-      countryList: "ae;ar;at;au;be;bg;br;ca;ch;cn;co;cu;cz;de;eg;fr;gb;gr;hk;hu;id;ie;il;in;it;jp;kr;lt;lv;ma;mx;my;ng;nl;no;nz;ph;pl;pt;ro;rs;ru;sa;se;sg;si;sk;th;tr;tw;ua;us;ve;za;",
-      newsArticles: {}
     }
 
     await this.apiDB.deleteApi(api)
