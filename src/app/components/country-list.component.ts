@@ -19,7 +19,6 @@ export class CountryListComponent implements OnInit {
   async ngOnInit(): Promise<void> {
   
     this.storedCountries = await this.countryListDB.getCountries()
-    console.info(this.storedCountries)
 
     if( this.storedCountries.length == 0){
 

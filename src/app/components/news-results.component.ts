@@ -60,25 +60,24 @@ export class NewsResultsComponent implements OnInit {
           }
           this.apiDB.addArticle(art)
         }
-  
       }
       else{
         console.info('still have articles')
       }
-      console.info('cache articles' , cacheArticles)
-      console.info('new articles' , this.articles)
 
       var counter = 0
       for (var i = 0; i < cacheArticles.length; i++) {
+        counter++
         this.articles.push(cacheArticles[i].articleDetails)
-        console.info(++counter)
       }
-      console.info(this.articles)
-  }
+      console.info('articles pulled from cache', counter)
+    }
 
-  saveArticle(){
-    window.alert("Sorry, this is only available in the paid version of the app");
+  async saveArticle(title: string, author: string){
 
+    console.info(title, this.countryCode)
+    const result = await this.apiDB.saveArticle(this.countryCode, title)
+    console.info(result)
   }
 
 

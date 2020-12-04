@@ -7,6 +7,7 @@ import { apiForm, article, country } from './models';
 @Injectable()
 export class database extends Dexie {
 
+
   apiKey = ""
 
   //collections
@@ -19,10 +20,10 @@ export class database extends Dexie {
     super('newsAppDB')
 
     // setup the different schemas with their respective unique primary (and secondary) indices
-    this.version(2).stores({
+    this.version(5).stores({
       apiForm: "++apiID, apiKey",
       countryList: "++countryID, longName",
-      newsArticles: "++articleID, timeStamp, country"
+      newsArticles: "++articleID, timeStamp, country, articleDetails.title"
     })
 
     // get a reference to the collection
@@ -68,12 +69,17 @@ export class database extends Dexie {
     console.info(new Date(new Date().getTime() - 5*60000))
 
     await this.newsArticles
-      .where('timeStamp')
-      .below(new Date(new Date().getTime() - 5*60000))
+      .where('timeStamp').below(new Date(new Date().getTime() - 5*60000))
+      .and(item => item.saved !== true)
       .delete()
 
     return this.newsArticles.where('country').equals(countryCode).toArray()
       
+  }
+
+  async saveArticle(countryCode: string, title: string) {
+    // return await this.newsArticles.where('[country+title]').anyOf([[countryCode, title]]).toArray()
+    return await this.newsArticles.where('articleDetails.title').equals(title).modify({saved: true})
   }
 
 }
